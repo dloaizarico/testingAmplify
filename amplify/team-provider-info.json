@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-frontend-dev-175522-authRole",
+      "UnauthRoleArn": "arn:aws:iam::161347808885:role/amplify-frontend-dev-175522-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::161347808885:role/amplify-frontend-dev-175522-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-frontend-dev-175522-deployment",
+      "UnauthRoleName": "amplify-frontend-dev-175522-unauthRole",
+      "StackName": "amplify-frontend-dev-175522",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:161347808885:stack/amplify-frontend-dev-175522/314f9950-a99a-11eb-a14b-06f1045e4a6a",
+      "AmplifyAppId": "d1utzcvb6csvnn"
+    },
+    "categories": {
+      "function": {
+        "frontend63c1c624CustomMessage": {
+          "REDIRECTURL": "",
+          "EMAILSUBJECT": "Confirm user for Ordering systsem",
+          "EMAILMESSAGE": "Please click on the link below to confirm your user",
+          "deploymentBucketName": "amplify-frontend-dev-175522-deployment",
+          "s3Key": "amplify-builds/frontend63c1c624CustomMessage-5a344d6d33386666644d-build.zip"
+        }
+      },
+      "auth": {
+        "orderingAmplifyCognito": {}
+      }
+    }
+  }
+}

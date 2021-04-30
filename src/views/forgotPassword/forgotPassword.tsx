@@ -32,15 +32,18 @@ const ForgotPassword = () => {
     Auth.forgotPassword(username)
       .then(data => {
         setSuccess(true)
+        navigate(`/resetPassword/${username}`)
       })
-      .catch((err: Error) => { console.log(err) })
+      .catch((err: Error) => { 
+        console.log(err.message)
+      })
       .finally(() => {
       })
   }
 
-  const goToLogin = () => {
-    navigate('/login')
-  }
+  // const goToLogin = () => {
+  //   navigate('/login')
+  // }
 
   return (
     <Page className={classes.root} title="Forgot Password" >
@@ -49,37 +52,33 @@ const ForgotPassword = () => {
           <Box mt={3} mb={1} >
             <Typography color="primary" variant="h3" > Ordering System </Typography>
           </Box>
-          {
-            !success ? (
+           {/* !success ? (  */}
               <Formik initialValues={AuthInitialValue} validationSchema={validationSchema} onSubmit={onSubmit} >
                 {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
                   <form onSubmit={handleSubmit}>
                     <Box mt={3} mb={1} >
                       <Typography variant="h2" > Forgot Password </Typography>
-                      <Typography variant="body2" > Please enter your email, then a link will then be sent to you to recover your password. </Typography>
+                      <Typography variant="body2" > Please enter your email, then a code will then be sent to you to change your password. </Typography>
                     </Box>
 
                     <InputText errors={errors} touched={touched} label="Email" name="email" onBlur={handleBlur} onChange={handleChange} value={values.email} />
 
-                    <Box my={2}>
-                      <Button color="primary" fullWidth size="large" type="submit" variant="contained" >Request Link</Button>
-                    </Box>
                   </form>
                 )}
               </Formik>
-            ) : (
-                <>
-                  <Box mt={3} mb={1} >
-                    <Typography variant="h2" > Forgot Password </Typography>
-                    <Typography variant="body2" > An email has been sent to you to recover your password </Typography>
-                  </Box>
+            {/* // ) : (
+            //     <>
+            //       <Box mt={3} mb={1} >
+            //         <Typography variant="h2" > Forgot Password </Typography>
+            //         <Typography variant="body2" > An code has been sent to you to recover your password </Typography>
+            //       </Box>
 
-                  <Box my={2}>
-                    <Button color="primary" fullWidth size="large" onClick={goToLogin} variant="contained" > Login </Button>
-                  </Box>
-                </>
-              )
-          }
+            //       <Box my={2}>
+            //         <Button color="primary" fullWidth size="large" onClick={goToLogin} variant="contained" > Login </Button>
+            //       </Box>
+            //     </>
+            //   )
+          // } */}
 
         </Container>
       </Box>

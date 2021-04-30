@@ -8,13 +8,16 @@ import { EditLocation } from '@material-ui/icons';
 import ResetPassword from './views/resetPassword/resetPassword';
 import NotFound from './views/notFound/notFound';
 import ForgotPassword from './views/forgotPassword/forgotPassword'
+import ConfirmEmail from './views/confirmEmail/confirmEmail'
+import DashboardLayout from './views/main/dashboardLayout'
+import Dashboard from './views/dashboard/dashboard'
 
 const routes = [
   {
-    // path: 'ordering',
-    // // element: <DashboardLayout />,
-    // children: [
-      // { path: 'dashboard', element: <Dashboard /> },
+    path: 'ordering',
+    element: <DashboardLayout />,
+    children: [
+      { path: 'dashboard', element: <Dashboard /> },
 
       // { path: 'users', element: <Users /> },
       // { path: 'users/new', element: <CreateUser /> },
@@ -41,18 +44,19 @@ const routes = [
       // { path: 'broadcast/new', element: <CreateBroadcast /> },
 
       // { path: '*', element: <NotFound /> }
-  //   ]
-  // },
-  // {
+    ]
+  },
+  {
     path: '/',
     element: <BaseLayout />,
     children: [
       { path: 'login', element: <Login /> },
       { path: 'signUp', element: <SignUp /> },
-      { path: 'forgotpassword', element: <ForgotPassword /> },
-      { path: 'resetpassword/:resetPasswordToken', element: <ResetPassword /> },
+      { path: 'confirmEmail/:username', element: <ConfirmEmail /> },
+      { path: 'forgotPassword', element: <ForgotPassword /> },
+      { path: 'resetPassword/:resetPasswordToken', element: <ResetPassword /> },
       { path: '404', element: <NotFound /> },
-      //  { path: '/', element: <Navigate to="/app/dashboard" /> },
+      { path: '/', element: <Navigate to="/ordering/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }

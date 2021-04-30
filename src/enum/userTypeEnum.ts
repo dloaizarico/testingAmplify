@@ -1,6 +1,6 @@
 enum userTypeEnum {
-    EMPLOYEE = 'Employee',
-    CUSTOMER = 'Customer',
+    EMPLOYEE = 'employees',
+    CUSTOMER = 'customers',
   }
   
   export default userTypeEnum

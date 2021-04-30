@@ -38,7 +38,7 @@ const ConfirmEmailContainer = () => {
                 navigate('/ordering/dashboard', { replace: true })
             })
             .catch(err => {
-                alert(err)
+                alert(err.message)
             });
     };
 

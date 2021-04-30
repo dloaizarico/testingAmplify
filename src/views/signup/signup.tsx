@@ -11,6 +11,7 @@ import { enumKeys } from 'src/helpers/enumHelper'
 import { capitalizeFirstLetter } from 'src/helpers/stringHelpers'
 // import { AlertSuccess } from 'src/components/Alert'
 import userTypeEnum from 'src/enum/userTypeEnum'
+import axios from 'axios'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         flexDirection: 'column',
     },
-    buttonContainer:{
+    buttonContainer: {
         margin: 20
     }
 }));
@@ -33,23 +34,48 @@ const SingUp = () => {
     const classes = useStyles();
     const navigate = useNavigate();
 
-    const onSubmit = (values: IUser) => {
+    const onSubmit = (values: IUser, {resetForm}) => {
         let { name, password, email, phoneNumber, role } = values
         Auth.signUp({
             username: values.email,
             password,
             attributes: {
                 email,
-                name,
-                phoneNumber,
-                role
+                given_name: name,
+                phone_number: phoneNumber,
             }
         }).then((result: any) => {
+            alert('Welcome to the ordering system')
+            navigate(`/confirmEmail/${result.user.getUsername()}`, { replace: true })
+            // let apiName = 'AdminQueries';
+            // let path = '/addUserToGroup';
 
-            navigate('/', { replace: true })
-
+            // console.log(result.user.getSignInUserSession())
+            // let myInit = {
+            //     body: {
+            //         "username": result.user.getUsername(),
+            //         "groupname": role
+            //     },
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         Authorization: `${result.user.getSignInUserSession().getAccessToken().getJwtToken()}`
+            //     }
+            // }
+            // localStorage.setItem('token', result.user.getSignInUserSession().getAccessToken().getJwtToken())
+            // localStorage.setItem('user', JSON.stringify(result.user))
+            // axios.post(apiName, path, myInit).then(result => {
+                
+            // }
+            // ).catch(error => {
+            //     alert(error)
+            // })
         })
-            .catch((error) => { alert(error) })
+            .catch((error) => {
+                alert(error.message)
+                console.log(error)
+            }).finally(()=>{
+                resetForm();
+            })
     }
 
     return (
@@ -76,14 +102,14 @@ const SingUp = () => {
                                     <Grid item xs={12} lg={12}>
                                         <InputText errors={errors} touched={touched} label="Phone Number" name="phoneNumber" onBlur={handleBlur} onChange={handleChange} value={values.phoneNumber} />
                                     </Grid>
-                                    <Grid item xs={12} lg={12}>
+                                    {/* <Grid item xs={12} lg={12}>
                                         <InputText select errors={errors} touched={touched} label="Role" name="role" onBlur={handleBlur} onChange={handleChange} value={values.role}>
                                             <MenuItem value="">None</MenuItem>
                                             {enumKeys(userTypeEnum).map(key =>
                                                 <MenuItem key={key} value={key}>{capitalizeFirstLetter(userTypeEnum[key])}</MenuItem>
                                             )}
                                         </InputText>
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12} lg={6}>
                                         <InputText errors={errors} touched={touched} label="Password" name="password" onBlur={handleBlur} onChange={handleChange} type="password" value={values.password} />
                                     </Grid>

@@ -29,15 +29,15 @@ const ResetPassword = () => {
 
   const onSubmit = (data: any) => {
     let { code, password } = data
-    let username = params.username
+    let username = params.resetPasswordToken
     Auth.forgotPasswordSubmit(username, code, password)
       .then(() => {
         alert("password was changed successfully")
-        navigate('/app/login', { replace: true })
+        navigate('/ordering/dashboard', { replace: true })
       })
       .catch((err: Error) => {
         console.log(err)
-        alert("error")
+        alert(err.message)
       })
   }
 

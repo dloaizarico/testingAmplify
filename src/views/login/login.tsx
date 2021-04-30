@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+  },
+  signUp: {
+    display: "flex",
+    justifyContent: 'flex-end',
   }
 }));
 
@@ -39,7 +43,7 @@ const Login = () => {
         navigate('/ordering/dashboard', { replace: true })
       })
       .catch((error) => {
-        alert(error)
+        alert(error.message)
         console.log(error)
        })
   };
@@ -54,15 +58,18 @@ const Login = () => {
           <Formik initialValues={AuthInitialValue} validationSchema={validationSchema} onSubmit={login} >
             {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
               <form onSubmit={handleSubmit}>
-                <Box mt={3} mb={1} >
-                  <Typography variant="h2" > Sign in </Typography>
-                </Box>
 
                 <InputText errors={errors} touched={touched} label="Email" name="email" onBlur={handleBlur} onChange={handleChange} value={values.email} />
                 <InputText errors={errors} touched={touched} label="Password" name="password" onBlur={handleBlur} onChange={handleChange} type="password" value={values.password} />
 
-                <RouterLink to="/reset-password">
-                  <Typography color="primary" variant="body1" > {`Reset password`} </Typography>
+                <RouterLink to="/forgotPassword">
+                  <Typography color="primary" variant="body1" > {`Forgot password`} </Typography>
+                </RouterLink>
+
+                <RouterLink to="/signUp">
+                  <div className={classes.signUp}>
+                    <Typography color="primary" variant="body1" > {`Not registered?, Sign Up`} </Typography>
+                  </div>
                 </RouterLink>
 
                 <Box my={2}>

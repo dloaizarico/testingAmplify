@@ -12,7 +12,7 @@ const Dashboard = () => {
     const classes = useStyles();
     return (
         <Page  className={classes.root} title="Dashboard">
-            <div>test</div>
+            
         </Page>
     );
 };

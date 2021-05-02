@@ -11,6 +11,9 @@ import ForgotPassword from './views/forgotPassword/forgotPassword'
 import ConfirmEmail from './views/confirmEmail/confirmEmail'
 import DashboardLayout from './views/main/dashboardLayout'
 import Dashboard from './views/dashboard/dashboard'
+import CreateUser from 'src/views/users/create/createUser'
+import UpdateUser from 'src/views/users/edit/updateUser'
+import FindUsers from 'src/views/users/list/findUsers'
 
 const routes = [
   {
@@ -19,9 +22,9 @@ const routes = [
     children: [
       { path: 'dashboard', element: <Dashboard /> },
 
-      // { path: 'users', element: <Users /> },
-      // { path: 'users/new', element: <CreateUser /> },
-      // { path: 'users/:id', element: <UserDetails /> },
+       { path: 'users', element: <FindUsers className='' /> },
+       { path: 'users/new', element: <CreateUser /> },
+       { path: 'users/:id', element: <UpdateUser /> },
 
       // { path: 'departments', element: <Departments /> },
       // { path: 'departments/new', element: <CreateDepartment /> },

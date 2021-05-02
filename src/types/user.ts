@@ -19,5 +19,12 @@ type IUser = {
     isActive: false,
     confirmedPassword: ''
   }
+
+  export type GetUsersQuery = {
+    listUsers:{
+        items: IUser[]
+        nextToken: string
+    }
+}
   
   export default IUser

@@ -12,11 +12,11 @@ export interface ITheme {
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#F4F6F8',
+      default: '#ffffff',
       paper: colors.common.white
     },
     primary: {
-      main: '#74BC1F',
+      main: '#3498DB',
       contrastText: '#fff'
     },
     secondary: {

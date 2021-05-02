@@ -29,7 +29,7 @@ const FindUsers: React.FC<{ className: string }> = ({ className, ...rest }) => {
 
   const handleClick = (id: string) => navigate(id)
 
-  const getData = (async (params: PaginationData<IUser>) => {
+  const getData = React.useCallback(async (params: PaginationData<IUser>) => {
 
     try {
       const users = await API.graphql(graphqlOperation(listUsers)) as {
@@ -44,7 +44,7 @@ const FindUsers: React.FC<{ className: string }> = ({ className, ...rest }) => {
     } catch (error) {
       console.log('error on fetching users', error);
     }
-  })
+  }, [])
 
     return (
     <Card className={clsx(className)} {...rest} >

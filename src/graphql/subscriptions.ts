@@ -10,7 +10,7 @@ export const onCreateUser = /* GraphQL */ `
       role
       email
       phoneNumber
-      status
+      isActive
       createdAt
       updatedAt
     }
@@ -24,7 +24,7 @@ export const onUpdateUser = /* GraphQL */ `
       role
       email
       phoneNumber
-      status
+      isActive
       createdAt
       updatedAt
     }
@@ -38,7 +38,7 @@ export const onDeleteUser = /* GraphQL */ `
       role
       email
       phoneNumber
-      status
+      isActive
       createdAt
       updatedAt
     }

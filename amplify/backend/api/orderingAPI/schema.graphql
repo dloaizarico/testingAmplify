@@ -4,5 +4,5 @@ type User @model {
   role: String!
   email: String!
   phoneNumber: String!
-  status: Boolean!
+  isActive: Boolean!
 }

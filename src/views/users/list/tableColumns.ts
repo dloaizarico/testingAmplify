@@ -15,7 +15,7 @@ const tableColumns: MUIDataTableColumn[] = [
   }, 
   {
     label: 'Role',
-    name: 'type',
+    name: 'role',
     options: {
       customBodyRender: (value: string) => getEnumValue(value, userTypeEnum)
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Button, Card, CardContent, Container, Divider, Grid, makeStyles, MenuItem, Typography } from '@material-ui/core'
 import Page from 'src/components/page'
 import ActionBar from 'src/components/actionBar'
@@ -13,6 +13,8 @@ import userTypeEnum from 'src/enum/userTypeEnum'
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { updateUser } from 'src/graphql/mutations';
 import { getUser } from 'src/graphql/queries'
+import {addUserToGroup, removeUserFromGroup} from 'src/helpers/rolesHelper'
+import { Email } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,13 +31,35 @@ const UpdateUser: React.FC = () => {
   const classes = useStyles()
   const navigate = useNavigate()
   const params = useParams()
+  let role: string = ''
+
+  
 
   const onSubmit = async (values: IUserInfo) => {
     try {
-      values.isActive = true
+      const updatedUser = {
+        email: values.email,
+        name: values.name,
+        role: values.role,
+        phoneNumber: values.phoneNumber,
+        id: values.id
+      }
 
-      await API.graphql(graphqlOperation(updateUser, { input: values }))
-      navigate('/ordering/users')
+      await API.graphql(graphqlOperation(updateUser, { input: updatedUser }))
+
+      // if(role!==values.role){
+        // removeUserFromGroup(values.email, role).then(()=>{
+          // addUserToGroup(values.email, values.role).then(()=>{
+            navigate('/ordering/users')
+          // }).catch(error=>{
+          //   console.log(error)
+          // })
+        // }).catch(error=>{
+        //   console.log(error)
+        // })
+        
+      // }
+      
     }
     catch (error) {
       console.log(error)
@@ -45,23 +69,26 @@ const UpdateUser: React.FC = () => {
 
   const { errors, touched, values, setValues, handleBlur, handleChange, handleSubmit } = useFormik({ initialValues: userInfoInitialValues, onSubmit, validationSchema })
 
-  React.useEffect(() => {
-    try {
-      // const userInfo = API.graphql(graphqlOperation(getUser, { id: params.id })) as {
-      //   data: getUserInfoQuery
-      // }
-      const userInfo = API.graphql(graphqlOperation(getUser, { id: params.id }))
-      console.log(userInfo)
+  useEffect(() => {
+    async function getUserData() {
+      try {
+        const userInfo = await API.graphql(graphqlOperation(getUser, { id: params.id })) as {
+          data: getUserInfoQuery
+        }
+        setValues(userInfo.data.getUser)
+        role=values.role
+      }
+      catch (error) {
+        console.log(error)
+      }
     }
-    catch (error) {
-      console.log(error)
-    }
-    finally { }
+
+    getUserData()
   }, [setValues, params.id])
 
   const handleDeactivate = async () => {
     try {
-      await API.graphql(graphqlOperation(updateUser, { input: { id: params.id, isActive: false } as IUserInfo }))
+      await API.graphql(graphqlOperation(updateUser, { input: { id: params.id, isActive: !values.isActive } as IUserInfo }))
       navigate('/ordering/users')
     }
     catch (error) {

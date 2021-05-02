@@ -9,9 +9,9 @@ import InputText from 'src/components/inputText';
 import validationSchema from './validationSchema';
 import { enumKeys } from 'src/helpers/enumHelper'
 import { capitalizeFirstLetter } from 'src/helpers/stringHelpers'
-// import { AlertSuccess } from 'src/components/Alert'
 import userTypeEnum from 'src/enum/userTypeEnum'
 import axios from 'axios'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +34,7 @@ const SingUp = () => {
     const classes = useStyles();
     const navigate = useNavigate();
 
-    const onSubmit = (values: IUser, {resetForm}) => {
+    const onSubmit = (values: IUser, { resetForm }) => {
         let { name, password, email, phoneNumber, role } = values
         Auth.signUp({
             username: values.email,
@@ -44,36 +44,14 @@ const SingUp = () => {
                 given_name: name,
                 phone_number: phoneNumber,
             }
-        }).then((result: any) => {
+        }).then(async (result: any) => {
             alert('Welcome to the ordering system')
             navigate(`/confirmEmail/${result.user.getUsername()}`, { replace: true })
-            // let apiName = 'AdminQueries';
-            // let path = '/addUserToGroup';
-
-            // console.log(result.user.getSignInUserSession())
-            // let myInit = {
-            //     body: {
-            //         "username": result.user.getUsername(),
-            //         "groupname": role
-            //     },
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         Authorization: `${result.user.getSignInUserSession().getAccessToken().getJwtToken()}`
-            //     }
-            // }
-            // localStorage.setItem('token', result.user.getSignInUserSession().getAccessToken().getJwtToken())
-            // localStorage.setItem('user', JSON.stringify(result.user))
-            // axios.post(apiName, path, myInit).then(result => {
-                
-            // }
-            // ).catch(error => {
-            //     alert(error)
-            // })
         })
             .catch((error) => {
-                alert(error.message)
+                alert("entre por aca" + error.message)
                 console.log(error)
-            }).finally(()=>{
+            }).finally(() => {
                 resetForm();
             })
     }

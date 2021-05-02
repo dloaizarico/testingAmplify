@@ -39,7 +39,7 @@ const Login = () => {
       .then((user: CognitoUser) => {
         localStorage.setItem('token', user.getSignInUserSession().getAccessToken().getJwtToken())
         localStorage.setItem('user', JSON.stringify(user))
-        console.log(JSON.stringify(user))
+        
         navigate('/ordering/dashboard', { replace: true })
       })
       .catch((error) => {

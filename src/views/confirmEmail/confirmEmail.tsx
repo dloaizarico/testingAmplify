@@ -6,6 +6,8 @@ import { Box, Button, Container, Typography, makeStyles } from '@material-ui/cor
 import Page from 'src/components/page';
 import InputText from 'src/components/inputText';
 import { AuthInitialValue } from 'src/types/auth';
+import { API, graphqlOperation } from 'aws-amplify';
+import { createUser } from 'src/graphql/mutations';
 
 // amplify
 import { Auth } from 'aws-amplify';
@@ -33,8 +35,8 @@ const ConfirmEmailContainer = () => {
         const { code } = values;
 
         Auth.confirmSignUp(params.username, code)
-            .then(() => {
-                alert("your account has been confirmed.")
+            .then(async () => {
+                alert("your account has been confirmed, please Sign In")
                 navigate('/ordering/dashboard', { replace: true })
             })
             .catch(err => {

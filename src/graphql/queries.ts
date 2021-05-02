@@ -10,7 +10,7 @@ export const getUser = /* GraphQL */ `
       role
       email
       phoneNumber
-      status
+      isActive
       createdAt
       updatedAt
     }
@@ -29,7 +29,7 @@ export const listUsers = /* GraphQL */ `
         role
         email
         phoneNumber
-        status
+        isActive
         createdAt
         updatedAt
       }

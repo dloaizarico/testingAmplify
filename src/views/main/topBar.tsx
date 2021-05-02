@@ -19,8 +19,9 @@ const TopBar: React.FC<{ className?: string, onMobileNavOpen(): any }> = ({ clas
     const navigate = useNavigate()
 
     const handleLogout = React.useCallback(() => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
         navigate('/login')
-
     }, [navigate])
 
     return (

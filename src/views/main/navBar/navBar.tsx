@@ -37,7 +37,6 @@ const NavBar: React.FC<{ onMobileClose(): void, openMobile: boolean }> = ({ onMo
     <Box height="100%" display="flex" flexDirection="column" >
       <Box alignItems="center" display="flex" flexDirection="column" p={2} >
         <Typography color="primary" variant="h5" >
-          {/* aca debe ir el username */}
         </Typography>
       </Box>
       <Divider />

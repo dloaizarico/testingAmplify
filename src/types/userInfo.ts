@@ -5,6 +5,7 @@ type IUserInfo = {
   phoneNumber: string,
   isActive: boolean,
   role: string
+  
 }
 
 export const userInfoInitialValues: IUserInfo = {
@@ -24,7 +25,7 @@ export type getUsersInfoQuery = {
 }
 
 export type getUserInfoQuery = {
-  user: IUserInfo
+  getUser: IUserInfo
   nextToken: string
 }
 

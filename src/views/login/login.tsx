@@ -78,6 +78,7 @@ const Login = () => {
               </form>
             )}
           </Formik>
+          <Typography color="primary" variant="h6" >Developed by Diego Loaiza</Typography>
         </Container>
       </Box>
     </Page>

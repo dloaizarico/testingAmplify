@@ -46,75 +46,55 @@ const FindUsers: React.FC<{ className: string }> = ({ className, ...rest }) => {
     }
   }, [])
 
+  const customActionSelect = (selectedRows: SelectedRows) => {
     return (
-    <Card className={clsx(className)} {...rest} >
-      <PerfectScrollbar>
-        <Box minWidth={1050}>
-          <Datatable
-            list={userData.data}
-            count={userData.count}
-            onClick={handleClick}
-            tableColumns={tableColumns}
-            getData={getData}
-            selectableRows='multiple'
-            serverSide
-          // customToolbarSelect={customActionSelect}
-          />
-        </Box>
-      </PerfectScrollbar>
-    </Card>
-  )
+      <Tooltip title={"Deactivate users"}>
+        <IconButton onClick={() => handleDeactivateUsers(selectedRows)} >
+          <Block /> <span className={classes.toolbarText}>Deactivate Users</span>
+        </IconButton>
+      </Tooltip>
+    )
+  }
 
-  //   API.get(params)
-  //     .then((users: Paginate<IUser[]>) => {
-  //       setUserData(users)
-  //     })
-  //     .catch(() => { })
-  //     .finally(() => { })
-  // })
+  const handleDeactivateUsers = (deactivatedRows: SelectedRows) => {
+    const idList: string[] = deactivatedRows.data.map((row: SelectedRowsData) => userData.data[row.dataIndex].id)
+    try {
+      await API.graphql(graphqlOperation(updateUser, {
+        input: {
+          status: false
+        },
+        condition: {
+          // id in idList
 
-  // const handleDeactivateUsers = (deactivatedRows: SelectedRows) => {
-  // const idList: string[] = deactivatedRows.data.map((row: SelectedRowsData) => userData.data[row.dataIndex].id)
-  // try {
-  //   // await API.graphql(graphqlOperation(updateUser, {
-  //   //   input: {
-  //   //     status: false
-  //   //   },
-  //   //   condition: {
-  //   //     id in idList
-  //   //   }
+        }
+
+      }))
+    }
+    catch (error) {
+      console.log('error on fetching users', error);
+    }
+  }
 
 
-  //   }))
-  // }
-  // catch (error) {
-  //   console.log('error on fetching users', error);
-  // }
-
-  // UserApi.deactivateMany(idList)
-  //   .then(() => {
-  //     setUserData((deactivatedUsers: Paginate<IUser[]>) => {
-  //       deactivatedUsers.data.forEach((user: IUser) => {
-  //         if (idList.indexOf(user.id) > -1) user.isActive = false
-  //       })
-  //       return deactivatedUsers
-  //     })
-  //   })
-  //   .catch((err: Error) => console.log(err))
-  //   .finally(() => { })
-  // }
-
-  // const customActionSelect = (selectedRows: SelectedRows) => {
-  //   return (
-  //     <Tooltip title={"Deactivate users"}>
-  //       <IconButton onClick={() => handleDeactivateUsers(selectedRows)} >
-  //         <Block /> <span className={classes.toolbarText}>Deactivate Users</span>
-  //       </IconButton>
-  //     </Tooltip>
-  //   )
-  // }
+    return (
+      <Card className={clsx(className)} {...rest} >
+        <PerfectScrollbar>
+          <Box minWidth={1050}>
+            <Datatable
+              list={userData.data}
+              count={userData.count}
+              onClick={handleClick}
+              tableColumns={tableColumns}
+              getData={getData}
+              selectableRows='multiple'
+              serverSide
+              customToolbarSelect={customActionSelect}
+            />
+          </Box>
+        </PerfectScrollbar>
+      </Card>
+    )
 
 
-
-}
-export default FindUsers
+  }
+  export default FindUsers

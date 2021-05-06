@@ -10,11 +10,9 @@ import { enumKeys } from 'src/helpers/enumHelper'
 import { capitalizeFirstLetter } from 'src/helpers/stringHelpers'
 import validationSchema from 'src/views/users/validationSchema'
 import userTypeEnum from 'src/enum/userTypeEnum'
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import { updateUser } from 'src/graphql/mutations';
 import { getUser } from 'src/graphql/queries'
-import {addUserToGroup, removeUserFromGroup} from 'src/helpers/rolesHelper'
-import { Email } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,9 +29,6 @@ const UpdateUser: React.FC = () => {
   const classes = useStyles()
   const navigate = useNavigate()
   const params = useParams()
-  let role: string = ''
-
-  
 
   const onSubmit = async (values: IUserInfo) => {
     try {
@@ -76,13 +71,11 @@ const UpdateUser: React.FC = () => {
           data: getUserInfoQuery
         }
         setValues(userInfo.data.getUser)
-        role=values.role
       }
       catch (error) {
         console.log(error)
       }
     }
-
     getUserData()
   }, [setValues, params.id])
 
